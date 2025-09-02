@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<body>
+  <h2>Tambah Transaksi</h2>
+  <form id="transaksiForm">
+    <input type="text" id="nama" placeholder="Nama"><br>
+    <input type="date" id="tanggal"><br>
+    <input type="number" id="jumlah" placeholder="Jumlah"><br>
+    <select id="tipe">
+      <option value="pemasukan">Pemasukan</option>
+      <option value="pengeluaran">Pengeluaran</option>
+    </select><br>
+    <button type="submit">Kirim</button>
+  </form>
+
+  <script>
+    document.getElementById("transaksiForm").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const data = {
+        nama: document.getElementById("nama").value,
+        tanggal: document.getElementById("tanggal").value,
+        jumlah: parseFloat(document.getElementById("jumlah").value),
+        tipe: document.getElementById("tipe").value
+      };
+      const res = await fetch("http://127.0.0.1:8000/tambah", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
+      });
+      const result = await res.json();
+      alert(JSON.stringify(result));
+    });
+  </script>
+</body>
+</html>
