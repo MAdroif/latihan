@@ -17,8 +17,8 @@
     document.getElementById("transaksiForm").addEventListener("submit", async (e) => {
       e.preventDefault();
       const data = {
-        nama: document.getElementById("nama").value,
         tanggal: document.getElementById("tanggal").value,
+        rincian: document.getElementById("rincian").value,
         jumlah: parseFloat(document.getElementById("jumlah").value),
         tipe: document.getElementById("tipe").value
       };
