@@ -30,19 +30,19 @@
   <script>
     window.onload = loadTransaksi;
 
-    ascync function loadTransaksi() {
+    async function loadTransaksi() {
       const res = await fetch("http://127.0.0.1:8000/transaksi");
       const data = await res.json();
-      const tbody = document.getElementById("transaksiTable);
+      const tbody = document.getElementById("transaksiTable");
       tbody.innerHTML = "";
       
       data.forEach(item => {
-      	const row = '<tr>
+      	const row = `<tr>
       		<td>${item.tanggal}</td>
       		<td>${item.rincian}</td>
       		<td>Rp${item.jumlah}</td>
       		<td>${item.tipe}</td>
-      	</tr>';
+      	</tr>`;
       	tbody.innerHTML += row;
       });
     }
@@ -54,7 +54,7 @@
         jumlah: parseFloat(document.getElementById("jumlah").value),
         tipe: document.getElementById("tipe").value
       };
-      await fetch("http://127.0.0.1:8000/tambah", {
+      const res = await fetch("http://127.0.0.1:8000/tambah", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data)
