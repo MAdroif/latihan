@@ -13,7 +13,39 @@
     <button type="submit">Kirim</button>
   </form>
 
+  <h3>Daftar Transaksi</h3>
+  <table border="1">
+    <thead>
+      <tr>
+        <th>Tanggal</th>
+        <th>Rincian</th>
+        <th>Jumlah</th>
+        <th>Tipe</th>
+      </tr>
+    </thead>
+    <tbody id="transaksiTable">
+    </tbody>
+  </table>
+  
   <script>
+    window.onload = loadTransaksi;
+
+    ascync function loadTransaksi() {
+      const res = await fetch("http://127.0.0.1:8000/transaksi");
+      const data = await res.json();
+      const tbody = document.getElementById("transaksiTable);
+      tbody.innerHTML = "";
+      
+      Data.forEach(item => {
+      	const row = '<tr>
+      		<td>${item.tanggal}</td>
+      		<td>${item.rincian}</td>
+      		<td>${item.jumlah}</td>
+      		<td>${item.tipe}</td>
+      	</tr>';
+      	tbody.innerHTML += row;
+      });
+    }
     document.getElementById("transaksiForm").addEventListener("submit", async (e) => {
       e.preventDefault();
       const data = {
@@ -27,8 +59,9 @@
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data)
       });
-      const result = await res.json();
-      alert(JSON.stringify(result));
+      loadTransaksi();
+      // const result = await res.json();
+      // alert(JSON.stringify(result));
     });
   </script>
 </body>
