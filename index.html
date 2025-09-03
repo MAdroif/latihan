@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <body>
-  <h2>Tambah Transaksi</h2>
+  <h2>Pencatatan Keuangan</h2>
   <form id="transaksiForm">
     <input type="date" id="tanggal"><br>
     <input type="text" id="rincian" placeholder="Rincian"><br>
@@ -36,11 +36,11 @@
       const tbody = document.getElementById("transaksiTable);
       tbody.innerHTML = "";
       
-      Data.forEach(item => {
+      data.forEach(item => {
       	const row = '<tr>
       		<td>${item.tanggal}</td>
       		<td>${item.rincian}</td>
-      		<td>${item.jumlah}</td>
+      		<td>Rp${item.jumlah}</td>
       		<td>${item.tipe}</td>
       	</tr>';
       	tbody.innerHTML += row;
@@ -54,7 +54,7 @@
         jumlah: parseFloat(document.getElementById("jumlah").value),
         tipe: document.getElementById("tipe").value
       };
-      const res = await fetch("http://127.0.0.1:8000/tambah", {
+      await fetch("http://127.0.0.1:8000/tambah", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data)
