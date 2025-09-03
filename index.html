@@ -59,9 +59,9 @@
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data)
       });
-      loadTransaksi();
       const result = await res.json();
       alert(JSON.stringify(result));
+      loadTransaksi();
     });
   </script>
 </body>
