@@ -45,6 +45,15 @@ async function loadTransaksi() {
     `;
   }
 }
+// fungsi hapus catatan
+async function hapusTransaksi(id) {
+  const res = await fetch(`http://127.0.0.1:8000/hapus/${id}`, {
+    method: "DELETE"
+  });
+  const result = await res.json();
+  alert(result.pesan || result.error);
+  loadTransaksi(); // refresh tabel setelah hapus
+}
 
 document.getElementById("transaksiForm").addEventListener("submit", async (e) => {
   e.preventDefault();
