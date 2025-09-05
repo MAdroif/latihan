@@ -24,6 +24,7 @@ async function loadTransaksi() {
         const formattedAmount = new Intl.NumberFormat('id-ID').format(item.jumlah);
         const row = `
           <tr style="animation: slideIn 0.3s ease-out;">
+            <td><input type="checkbox" value="${item.id}" onchange="updateAksiBtn()"></td>
             <td><input type="checkbox" value="${item.id}"></td>
             <td>${new Date(item.tanggal).toLocaleDateString('id-ID')}</td>
             <td>${item.rincian}</td>
@@ -55,6 +56,25 @@ async function hapusTransaksi(id) {
   alert(result.pesan || result.error);
   loadTransaksi(); // refresh tabel setelah hapus
 }
+
+function updateAksiBtn() {
+  const checkboxes = document.querySelectorAll("#transaksiTable input[type='checkbox']");
+  const checked = Array.from(checkboxes).some(cb => cb.checked);
+  const aksiBtn = document.getElementById("aksiBtn");
+  aksiBtn.textContent = checked ? "Hapus Terpilih" : "Pilih";
+}
+
+document.getElementById("aksiBtn").addEventListener("click", async () => {
+  const aksiBtn = document.getElementById("aksiBtn");
+  if (aksiBtn.textContent === "Hapus Terpilih") {
+    const checkboxes = document.querySelectorAll("#transaksiTable input[type='checkbox']:checked");
+    for (let cb of checkboxes) {
+      await hapusTransaksi(cb.value);
+    }
+    loadTransaksi();
+    aksiBtn.textContent = "Pilih"; // reset lagi
+  }
+});
 document.getElementById("hapusBtn").addEventListener("click", async () => {
   const checkboxes = document.querySelectorAll("#transaksiTable input[type='checkbox']:checked");
   for (let cb of checkboxes) {
