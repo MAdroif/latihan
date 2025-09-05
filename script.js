@@ -13,7 +13,7 @@ async function loadTransaksi() {
     if (data.length === 0) {
       tbody.innerHTML = `
         <tr>
-          <td colspan="4" class="empty-state">
+          <td colspan="5" class="empty-state">
             <div>📝</div>
             <p>Belum ada transaksi</p>
           </td>
