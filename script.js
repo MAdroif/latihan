@@ -56,13 +56,6 @@ async function hapusTransaksi(id) {
   loadTransaksi(); // refresh tabel setelah hapus
 }
 
-function updateAksiBtn() {
-  const checkboxes = document.querySelectorAll("#transaksiTable input[type='checkbox']");
-  const checked = Array.from(checkboxes).some(cb => cb.checked);
-  const aksiBtn = document.getElementById("aksiBtn");
-  aksiBtn.textContent = checked ? "Hapus Terpilih" : "Pilih";
-}
-
 document.getElementById("aksiBtn").addEventListener("click", async () => {
   const aksiBtn = document.getElementById("aksiBtn");
   if (aksiBtn.textContent === "Hapus Terpilih") {
@@ -74,6 +67,7 @@ document.getElementById("aksiBtn").addEventListener("click", async () => {
     aksiBtn.textContent = "Pilih"; // reset lagi
   }
 });
+
 document.getElementById("hapusBtn").addEventListener("click", async () => {
   const checkboxes = document.querySelectorAll("#transaksiTable input[type='checkbox']:checked");
   for (let cb of checkboxes) {
@@ -82,6 +76,12 @@ document.getElementById("hapusBtn").addEventListener("click", async () => {
   loadTransaksi(); // refresh tabel
 });
 
+function updateAksiBtn() {
+  const checkboxes = document.querySelectorAll("#transaksiTable input[type='checkbox']");
+  const checked = Array.from(checkboxes).some(cb => cb.checked);
+  const aksiBtn = document.getElementById("aksiBtn");
+  aksiBtn.textContent = checked ? "Hapus Terpilih" : "Pilih";
+}
 document.getElementById("transaksiForm").addEventListener("submit", async (e) => {
   e.preventDefault();
   
