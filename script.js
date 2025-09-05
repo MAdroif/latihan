@@ -24,6 +24,7 @@ async function loadTransaksi() {
         const formattedAmount = new Intl.NumberFormat('id-ID').format(item.jumlah);
         const row = `
           <tr style="animation: slideIn 0.3s ease-out;">
+            <td><input type="checkbox" value="${item.id}"></td>
             <td>${new Date(item.tanggal).toLocaleDateString('id-ID')}</td>
             <td>${item.rincian}</td>
             <td class="amount ${item.tipe}">Rp ${formattedAmount}</td>
@@ -54,6 +55,13 @@ async function hapusTransaksi(id) {
   alert(result.pesan || result.error);
   loadTransaksi(); // refresh tabel setelah hapus
 }
+document.getElementById("hapusBtn").addEventListener("click", async () => {
+  const checkboxes = document.querySelectorAll("#transaksiTable input[type='checkbox']:checked");
+  for (let cb of checkboxes) {
+    await hapusTransaksi(cb.value); // panggil backend untuk tiap id terpilih
+  }
+  loadTransaksi(); // refresh tabel
+});
 
 document.getElementById("transaksiForm").addEventListener("submit", async (e) => {
   e.preventDefault();
