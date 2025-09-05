@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pencatatan Keuangan</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h2>💰 Pencatatan Keuangan</h2>
+      <p>Kelola keuangan Anda dengan mudah</p>
+    </div>
+
+    <div class="form-section">
+      <form id="transaksiForm">
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="tanggal">Tanggal</label>
+            <input type="date" id="tanggal" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="tipe">Tipe Transaksi</label>
+            <select id="tipe" required>
+              <option value="pemasukan">💰 Pemasukan</option>
+              <option value="pengeluaran">💸 Pengeluaran</option>
+            </select>
+          </div>
+          
+          <div class="form-group">
+            <label for="rincian">Rincian</label>
+            <input type="text" id="rincian" placeholder="Masukkan rincian transaksi" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="jumlah">Jumlah (Rp)</label>
+            <input type="number" id="jumlah" placeholder="0" min="0" step="1000" required>
+          </div>
+        </div>
+        
+        <div style="text-align: center;">
+          <button type="submit" class="submit-btn">Tambah Transaksi</button>
+        </div>
+      </form>
+    </div>
+
+    <div class="table-section">
+      <h3 class="section-title">📊 Daftar Transaksi</h3>
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th>Tanggal</th>
+              <th>Rincian</th>
+              <th>Jumlah</th>
+              <th>Tipe</th>
+            </tr>
+          </thead>
+          <tbody id="transaksiTable">
+            <tr>
+              <td colspan="4" class="empty-state">
+                <div>📝</div>
+                <p>Belum ada transaksi</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  
+  <script src="script.js"></script>
+</body>
+</html>
