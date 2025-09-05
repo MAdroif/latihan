@@ -25,7 +25,6 @@ async function loadTransaksi() {
         const row = `
           <tr style="animation: slideIn 0.3s ease-out;">
             <td><input type="checkbox" value="${item.id}" onchange="updateAksiBtn()"></td>
-            <td><input type="checkbox" value="${item.id}"></td>
             <td>${new Date(item.tanggal).toLocaleDateString('id-ID')}</td>
             <td>${item.rincian}</td>
             <td class="amount ${item.tipe}">Rp ${formattedAmount}</td>
